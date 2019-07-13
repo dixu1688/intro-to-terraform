@@ -10,6 +10,18 @@
 
 terraform {
   required_version = ">= 0.12"
+
+  backend "s3" {
+    # Replace this with your bucket name!
+    bucket         = "jrs-tf-automation-state"
+    key            = "dev/services/front-end/webapps/terraform.tfstate"
+    region         = "us-east-2"
+
+    # Replace this with your DynamoDB table name!
+    dynamodb_table = "jrs-tf-automation-state-locks"
+    encrypt        = true
+  }
+}
 }
 
 # ------------------------------------------------------------------------------
@@ -28,7 +40,7 @@ provider "aws" {
 resource "aws_instance" "example" {
   # Amazon Linux 2 AMI (HVM), SSD Volume Type in us-east-2
   #ami                    = "ami-0d8f6eb4f641ef691"
-  
+
   # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type in us-east-2
   ami                    = "ami-0c55b159cbfafe1f0"
 
