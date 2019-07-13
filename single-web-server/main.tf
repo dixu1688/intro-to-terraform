@@ -28,12 +28,11 @@ provider "aws" {
 resource "aws_instance" "example" {
   # Amazon Linux 2 AMI (HVM), SSD Volume Type in us-east-2
   #ami                    = "ami-0d8f6eb4f641ef691"
-  
+
   # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type in us-east-2
   ami                    = "ami-0c55b159cbfafe1f0"
 
-  instance_type          = "t3a.nano"
-  key_name               = "dxuDevLin"
+  instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.instance.id]
 
   user_data = <<-EOF
